@@ -1,6 +1,10 @@
-Run the program with python main.py
+STEP TO LAUNCH THE PROGRAM:
 
-Code structure:
+- pip install -r requirements.txt
 
-- main.py main program
-- views folder contains all the views
+- Run the program with python main.py
+
+CODE STRUCTURE:
+
+- main.py: main program
+- views folder: views
