@@ -1,7 +1,7 @@
 import customtkinter
-from views.screenconfig import ScreenConfig
-from views.menubar import MenuBar
-from views.mainframe import MainFrame
+from screenconfig import ScreenConfig
+from views.components.menubar import MenuBar
+from views.frames.main_frame import MainFrame
 
 # PROGRAMME PRINCIPALE:
 
@@ -10,16 +10,13 @@ class Main(customtkinter.CTk):
         super().__init__()
 
         # Configuration de la fenêtre
-        ScreenConfig(self, 1366, "ACSSQDA 1.1")
+        ScreenConfig(self, "ACSSQDA 1.1")
 
         # Barre de menu
         MenuBar(self)
 
         # Fenêtre principale
         self.main_frame = MainFrame(self)
-
-        # Affichage par défaut
-        self.main_frame.default_display()
     
     
 app = Main()
