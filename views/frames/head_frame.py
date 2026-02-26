@@ -1,45 +1,61 @@
+"""Header frame for invoice forms and database records.
+
+This module contains the header section that displays invoice forms
+and database records. It supports switching between different invoice types.
+"""
+
 import customtkinter
-from views.bill_type.regularbill import RegularBill
-from views.bill_type.proformabill import ProformaBill
-from views.foundation.styles import Styles
+
+from views.bill_type.standard_invoice import StandardInvoice
+from views.bill_type.proforma_invoice import ProformaInvoice
+from views.foundation.styles import UIStyles
+
 
 class HeadFrame(customtkinter.CTkFrame):
-    def __init__(self, master):
-        self.styles = Styles()
-        super().__init__(master)
-        
-        # Initialiasation de la facture affichée par défaut    
-        self.regular_bill = RegularBill(self)
-        
-        # Formulaire de la facture:
-        self.regular_bill.client_form.pack(side="left", pady=self.styles.pady)   
-        
-        # Affichage des enregistrements de la base de données
-        self.regular_bill.database_records.pack(side="right", expand=True, fill="both", pady=self.styles.pady)
+    """Header frame for displaying invoice forms and records.
     
-    # Méthode pour effacer le contenu du cadre de tête avant d'afficher une nouvelle facture    
-    def clear_head_frame(self):
+    This frame displays the invoice form and corresponding database records.
+    It supports switching between regular and proforma invoice types.
+    """
+
+    def __init__(self, master) -> None:
+        """Initialize the header frame.
+        
+        Args:
+            master: The parent widget (MainFrame).
+        """
+        self.styles = UIStyles()
+        super().__init__(master)
+
+        # Initialize with regular invoice by default
+        self.current_invoice = None
+        self.display_regular_bill()
+
+    def _clear(self) -> None:
+        """Clear all child widgets from the frame."""
         for widget in self.winfo_children():
             widget.destroy()
-          
-    
-    # Méthode pour afficher la facture régulière      
-    def display_regular_bill(self):
+
+    def clear_head_frame(self) -> None:
+        """Clear the frame content before displaying a new invoice type."""
+        self._clear()
+
+    def display_regular_bill(self) -> None:
+        """Display the regular invoice form.
         
+        Switches to display the regular bill type with all its specific fields
+        and database records.
+        """
         self.clear_head_frame()
+        self.current_invoice = StandardInvoice(self)
+
+    def display_proforma_bill(self) -> None:
+        """Display the proforma invoice form.
         
-        self.regular_bill = RegularBill(self)
-        self.regular_bill.client_form.pack(side="left", expand=True, fill="both", pady=self.styles.pady)   
-        self.regular_bill.database_records.pack(side="right", expand=True, fill="both", pady=self.styles.pady)
-        
-    
-    # Méthode pour afficher la facture proforma        
-    def display_proforma_bill(self):
-        
+        Switches to display the proforma bill type with all its specific fields
+        and database records.
+        """
         self.clear_head_frame()
-        
-        self.proforma_bill = ProformaBill(self)  
-        self.proforma_bill.client_form.pack(side="left", expand=True, fill="both", pady=self.styles.pady)  
-        self.proforma_bill.database_records.pack(side="right", expand=True, fill="both", pady=self.styles.pady)
+        self.current_invoice = ProformaInvoice(self)
        
     

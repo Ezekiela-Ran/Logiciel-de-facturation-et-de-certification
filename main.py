@@ -1,23 +1,36 @@
+"""Main application entry point for ACSSQDA 1.1.
+
+This module initializes and runs the invoice management application.
+"""
+
 import customtkinter
+
 from screenconfig import ScreenConfig
-from views.components.menubar import MenuBar
+from views.components.menubar import ApplicationMenuBar
 from views.frames.main_frame import MainFrame
 
-# PROGRAMME PRINCIPALE:
 
-class Main(customtkinter.CTk):
-    def __init__(self):
+class InvoiceApplication(customtkinter.CTk):
+    """Main application window for invoice management system.
+    
+    This class initializes the main window with all UI components including
+    the screen configuration, menu bar, and main frame.
+    """
+
+    def __init__(self) -> None:
+        """Initialize the invoice application with all UI components."""
         super().__init__()
 
-        # Configuration de la fenêtre
+        # Configure the application window
         ScreenConfig(self, "ACSSQDA 1.1")
 
-        # Barre de menu
-        MenuBar(self)
+        # Initialize the menu bar
+        ApplicationMenuBar(self)
 
-        # Fenêtre principale
+        # Initialize the main content frame
         self.main_frame = MainFrame(self)
-    
-    
-app = Main()
-app.mainloop()
+
+
+if __name__ == "__main__":
+    app = InvoiceApplication()
+    app.mainloop()
